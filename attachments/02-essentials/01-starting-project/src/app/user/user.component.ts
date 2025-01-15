@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
 
-const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+const randomIndexGenerator = () => Math.floor(Math.random() * DUMMY_USERS.length) ;
 
 @Component({
   selector: 'app-user',
@@ -11,11 +11,20 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  public selectedUser = DUMMY_USERS[randomIndex];
+  public selectedUser = DUMMY_USERS[randomIndexGenerator()];
 
   get imagePath(){
     return `assets/users/${this.selectedUser.avatar}`;
     // return `assets/users/' + selectedUser.avatar"
+  }
+
+  onSelectUser(){
+    let newIndex = randomIndexGenerator()
+    // let oldIndex = DUMMY_USERS.indexOf(this.selectedUser);
+    // console.log(`oldIndex: ${oldIndex}`);
+    // console.log(`newIndex: ${newIndex}`);
+    this.selectedUser = DUMMY_USERS[newIndex];
+    // console.log('Clicked');
   }
 }
 
