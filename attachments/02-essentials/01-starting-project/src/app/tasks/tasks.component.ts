@@ -7,16 +7,14 @@ import { dummyTasks } from '../dummy-tasks';
   standalone: true,
   imports: [TaskComponent],
   templateUrl: './tasks.component.html',
-  styleUrl: './tasks.component.css'
+  styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-   @Input({required: true}) name?: string;
-   @Input({required: true}) userId?: string;
-   tasks = dummyTasks;
+  @Input({ required: true }) name?: string;
+  @Input({ required: true }) userId?: string;
+  tasks = dummyTasks;
 
-   get selectedUserTasks(){
+  get selectedUserTasks() {
     return this.tasks.filter((task) => task.userId === this.userId);
   }
 }
-
-

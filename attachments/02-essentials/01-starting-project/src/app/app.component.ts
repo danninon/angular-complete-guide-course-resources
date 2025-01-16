@@ -13,7 +13,7 @@ import { DUMMY_USERS } from './dummy-users';
 })
 export class AppComponent {
   public users = DUMMY_USERS;
-  
+
   private defaultUser = {
     id: '0',
     name: 'No user chosen',
@@ -21,17 +21,15 @@ export class AppComponent {
   };
 
   // private selectedUserId = this.users[0].id  || this.defaultUser.id
-    private selectedUserId?: string;
+  private selectedUserId?: string;
   // public selectedUser: { id: string; name: string; avatar: string } = this.users[0] || this.defaultUser
 
   get selecetdUser() {
-    return this.users.find((user) => user.id === this.selectedUserId) ;
+    return this.users.find((user) => user.id === this.selectedUserId);
   }
 
   onSelectUser(userId: string) {
     console.log('User selected:', userId);
     this.selectedUserId = userId;
-      
   }
-
 }
