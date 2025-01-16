@@ -9,17 +9,23 @@ import { Component , EventEmitter, Input, Output, output } from '@angular/core';
 }) 
 
 export class UserComponent {
-  @Input({required: true}) id!: string;
-  @Input({required: true}) avatar!: string;
-  @Input({required: true}) name!: string;
+  // @Input({required: true}) id!: string;
+  // @Input({required: true}) avatar!: string;
+  // @Input({required: true}) name!: string;
+  @Input({required: true}) user!: {
+    id: string;
+    name: string;
+    avatar: string 
+  };
+
   @Output() public select = new EventEmitter<string>();
 
   get imagePath(){
-    return `assets/users/${this.avatar}`;    
+    return `assets/users/${this.user.avatar}`;    
   }
 
   public onSelectUser(){
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
   }
 }
 

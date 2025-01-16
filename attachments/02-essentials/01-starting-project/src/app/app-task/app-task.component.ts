@@ -8,7 +8,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './app-task.component.css'
 })
 export class AppTaskComponent {
-  // @Input({required: true}) id!: string;
-  // @Input({required: true}) avatar!: string;
-  @Input({required: true}) name!: string;
+   @Input() name?: string;
 }
