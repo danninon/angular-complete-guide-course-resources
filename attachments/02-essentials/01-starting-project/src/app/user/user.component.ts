@@ -11,7 +11,17 @@ const randomIndexGenerator = () => Math.floor(Math.random() * DUMMY_USERS.length
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  public selectedUser = DUMMY_USERS[randomIndexGenerator()];
+  public selectedUser: { id?: string; name?: string; avatar?: string } = {};
+// public selectedUser: { id: string; name: string; avatar: string } = {
+//   id: '',
+//   name: '',
+//   avatar: '',
+// };
+
+  constructor(){
+    this.selectedUser = DUMMY_USERS[randomIndexGenerator()];
+  }
+ 
 
   get imagePath(){
     return `assets/users/${this.selectedUser.avatar}`;
