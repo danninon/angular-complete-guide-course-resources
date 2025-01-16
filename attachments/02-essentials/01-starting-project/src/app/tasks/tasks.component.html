@@ -1,5 +1,3 @@
-<h2>Hello</h2>
-<h2>Hello</h2>
 <section id="tasks">
     <header>
         <h2>{{name}}'s Tasks</h2>
@@ -11,7 +9,7 @@
     <ul>
         @for(task of selectedUserTasks; track task.id){
             <li>
-                <app-task />
+                <app-task [task] = "task"/>
             </li>
         }        
     </ul>
