@@ -1,6 +1,4 @@
-import { Component , Input } from '@angular/core';
-import { DUMMY_USERS } from '../dummy-users';
-
+import { Component , Input, input, computed } from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -13,7 +11,11 @@ import { DUMMY_USERS } from '../dummy-users';
 export class UserComponent {
   @Input({required: true}) avatar!: string;
   @Input({required: true}) name!: string;
+  // public avatar = input<string>('');
+  // public avatar = input.required<string>(); //these are readonly
+  // public name = input.required<string>();
 
+  // public imagePath = computed(() => `assets/users/${this.avatar()}`);
   get imagePath(){
     return `assets/users/${this.avatar}`;    
   }
