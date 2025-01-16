@@ -1,4 +1,5 @@
 <h2>Hello</h2>
+<h2>Hello</h2>
 <section id="tasks">
     <header>
         <h2>{{name}}'s Tasks</h2>
@@ -8,18 +9,11 @@
     </header>
 
     <ul>
-        <li>
-            <app-task/>
-        </li>
-        <li>
-            <app-task/>
-        </li>
-        <li>
-            <app-task/>
-        </li>
-        <li>
-            <app-task/>
-        </li>
+        @for(task of selectedUserTasks; track task.id){
+            <li>
+                <app-task />
+            </li>
+        }        
     </ul>
 </section>
 
