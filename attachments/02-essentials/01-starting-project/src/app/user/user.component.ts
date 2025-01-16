@@ -11,6 +11,7 @@ import { User } from '../interfaces/user';
 
 export class UserComponent {
   @Input({required: true}) user!: User;
+
   @Output() public select = new EventEmitter<string>();
 
   get imagePath(){
