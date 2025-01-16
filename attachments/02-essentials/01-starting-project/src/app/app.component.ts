@@ -14,19 +14,25 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   public users = DUMMY_USERS;
+  
   private defaultUser = {
     id: '0',
     name: 'No user chosen',
     avatar: 'default-avatar.png',
   };
 
-  public selectedUser: { id: string; name: string; avatar: string } = this.users[0] || this.defaultUser
+  private selectedUserId = this.users[0].id  || this.defaultUser.id
   
+  // public selectedUser: { id: string; name: string; avatar: string } = this.users[0] || this.defaultUser
+
+  get selecetdUser() {
+    return this.users.find((user) => user.id === this.selectedUserId)!;
+  }
 
   onSelectUser(userId: string) {
     console.log('User selected:', userId);
-    this.selectedUser =
-      this.users.find((user) => user.id === userId) || this.defaultUser
-    console.log('Selected user:', this.selectedUser);
+    this.selectedUserId = userId;
+      
   }
+
 }
