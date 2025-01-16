@@ -1,18 +1,9 @@
 <div>
     <button (click)="onSelectUser()" > <!-- this is how you add an event listener on angular-->
-        
-        <!-- <img 
-        [src] = "'assets/users/' + selectedUser.avatar"
-        [alt] = "selectedUser.name"
-        /> -->
-
-        <!-- This is how you bind data -->
         <img 
         [src] = "imagePath" 
         [alt] = "name"
         />
-
         <span>{{name}}</span>
-
     </button>
 </div>
