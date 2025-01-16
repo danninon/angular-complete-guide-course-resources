@@ -21,7 +21,7 @@ export class AppComponent {
   };
 
   // private selectedUserId = this.users[0].id  || this.defaultUser.id
-  private selectedUserId?: string;
+  public selectedUserId?: string;
   // public selectedUser: { id: string; name: string; avatar: string } = this.users[0] || this.defaultUser
 
   get selecetdUser() {
