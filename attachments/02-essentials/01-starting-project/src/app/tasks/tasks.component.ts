@@ -15,7 +15,7 @@ import { TasksService } from './tasks.serivce';
 export class TasksComponent {
   @Input({ required: true }) name!: string;
   @Input({ required: true }) userId!: string;
-  tasks = dummyTasks;
+  // tasks = dummyTasks;
   public showForm:boolean = false;
 
   constructor(private tasksService: TasksService) {
@@ -28,10 +28,6 @@ export class TasksComponent {
 
   get selectedUserTasks() {
     return this.tasksService.getTasks(this.userId);
-  }
-
-  onCompleteTask(id: string){
-    this.tasks = this.tasks.filter((task)=> task.id === id);
   }
 
   onCloseForm(){
