@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { dummyTasks } from '../dummy-tasks';
 import { TaskFormComponent } from './task-form/task-form.component';
+import { NewTaskData } from '../interfaces/task.model';
 @Component({
   selector: 'app-tasks',
   standalone: true,
@@ -10,8 +11,8 @@ import { TaskFormComponent } from './task-form/task-form.component';
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-  @Input({ required: true }) name?: string;
-  @Input({ required: true }) userId?: string;
+  @Input({ required: true }) name!: string;
+  @Input({ required: true }) userId!: string;
   tasks = dummyTasks;
   public showForm:boolean = false;
 
@@ -26,6 +27,17 @@ export class TasksComponent {
 
   onCompleteTask(id: string){
     this.tasks = this.tasks.filter((task)=> task.id === id);
+  }
+
+  onTaskAdded(taskData: NewTaskData){
+    this.tasks.unshift({
+      id: Math.random().toString(),
+      userId: this.userId,
+      title: taskData.title,
+      summary: taskData.summary,
+      dueDate: taskData.date
+    });
+    this.toggleForm();
   }
 
   onCancelForm(){

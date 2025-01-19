@@ -4,7 +4,7 @@
     <menu>
       <button (click)="toggleForm()">Add Task</button>
       @if (showForm) {
-          <app-task-form (cancel)="onCancelForm()"/>
+          <app-task-form (cancel)="onCancelForm()" (addTask)="onTaskAdded($event)"/>
       } @else {
           <p>Click "Add Task" to fill in a task.</p>
       }
