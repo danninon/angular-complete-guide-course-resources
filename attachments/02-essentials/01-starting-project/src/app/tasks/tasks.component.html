@@ -2,7 +2,12 @@
   <header>
     <h2>{{ name }}'s Tasks</h2>
     <menu>
-      <button>Add Task</button>
+      <button (click)="toggleForm()">Add Task</button>
+      @if (showForm) {
+          <app-task-form/>
+      } @else {
+          <p>Click "Add Task" to fill in a task.</p>
+      }
     </menu>
   </header>
 
