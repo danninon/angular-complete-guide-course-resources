@@ -4,11 +4,11 @@
     <menu>
       <button (click)="toggleForm()">Add Task</button>
       @if (showForm) {
-          <app-task-form (cancel)="onCancelForm()" (addTask)="onTaskAdded($event)"/>
+          <app-task-form [userId]="userId" (close)="onCloseForm()"/>
       } @else {
           <p>Click "Add Task" to fill in a task.</p>
       }
-    </menu>
+    </menu> 
   </header>
 
   <ul>

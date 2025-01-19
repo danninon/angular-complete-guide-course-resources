@@ -22,33 +22,19 @@ export class TasksComponent {
     this.tasksService = tasksService;
   }
 
-
   toggleForm() {
       this.showForm = !this.showForm;
   }
 
   get selectedUserTasks() {
     return this.tasksService.getTasks(this.userId);
-    // return this.tasks.filter((task) => task.userId === this.userId);
   }
 
   onCompleteTask(id: string){
     this.tasks = this.tasks.filter((task)=> task.id === id);
   }
 
-  onTaskAdded(taskData: NewTaskData){
-    this.tasksService.addTask(taskData, this.userId);
-    // this.tasks.unshift({
-    //   id: Math.random().toString(),
-    //   userId: this.userId,
-    //   title: taskData.title,
-    //   summary: taskData.summary,
-    //   dueDate: taskData.date
-    // });
-    this.toggleForm();
-  }
-
-  onCancelForm(){
-    this.toggleForm();
+  onCloseForm(){
+    this.showForm = false;
   }
 }
