@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-server-status',
@@ -8,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './server-status.component.css'
 })
 export class ServerStatusComponent implements OnInit {
+private interval?: ReturnType<typeof setInterval>;
+private destroyRef = inject(DestroyRef);
+
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
-    console.log('in ngOnInit');
-    setInterval(()=> {
+    console.log("IN 'ngOnInit'");
+      // this.interval = setInterval(()=> {
+        const interval  = setInterval(()=> {
       console.log('Checking server status...');
       const randResult = Math.random();
       console.log(randResult);
@@ -21,10 +25,25 @@ export class ServerStatusComponent implements OnInit {
         this.currentStatus = randResult < 0.3 ? 'unknown' : 'offline';
       }
     }, 5000);
+    // console.log("typeof this.interval ", typeof this.interval);
+
+    this.destroyRef.onDestroy(()=>{
+      clearInterval(interval);
+    })
   } 
   
+  // ngOnDestroy(): void {
+  //   clearTimeout(this.interval);
+  // }
+
+  
+  ngAfterViewInit(){
+    console.log("IN 'ngAfterViewInit'");
+  }
+
   
   currentStatus:'online' | 'offline' | 'unknown' = 'offline';
 
   constructor() { }
+  
 }
