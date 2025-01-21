@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { SortPipe } from "./sort.pipe";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
+  imports: [SortPipe],
 })
 export class AppComponent {
   currentDate = new Date();
