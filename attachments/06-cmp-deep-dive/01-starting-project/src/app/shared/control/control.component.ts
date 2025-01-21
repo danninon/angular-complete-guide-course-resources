@@ -36,7 +36,7 @@ export class ControlComponent implements AfterContentInit {
     );
 
     constructor(){
-      afterRender(()=>{console.log('afterRender')});
+      // afterRender(()=>{console.log('afterRender')});
       afterNextRender(()=>{console.log('afterNextRender')});
     }
  

@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  output,
   viewChild,
   ViewChild,
 } from '@angular/core';
@@ -20,7 +21,7 @@ export class NewTicketComponent implements AfterViewInit {
   
   // @ViewChild('form') private form?: ElementRef<HTMLFormElement>;
   private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
-
+  add = output<{title: string, text: string}>();
 
   // here its guranteed that the native elements had been created.
   ngAfterViewInit(): void {
@@ -34,7 +35,8 @@ export class NewTicketComponent implements AfterViewInit {
     console.log('titleInput.value:', title);
     console.log('textInput.value:', text);
     // console.dir(titleElement);
-
+    // console.dir(textElement);
+    this.add.emit({title, text});
     // this.form?.nativeElement.reset();
     this.form().nativeElement.reset();
   }
