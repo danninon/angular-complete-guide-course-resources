@@ -18,7 +18,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './new-ticket.component.css',
 })
 export class NewTicketComponent implements AfterViewInit {
-  
+  twoWayBindingTitle = ''
+  twoWayBindingText = ''
+
   // @ViewChild('form') private form?: ElementRef<HTMLFormElement>;
   private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
   add = output<{title: string, text: string}>();
@@ -36,8 +38,11 @@ export class NewTicketComponent implements AfterViewInit {
     console.log('textInput.value:', text);
     // console.dir(titleElement);
     // console.dir(textElement);
-    this.add.emit({title, text});
+    // this.add.emit({title, text});
+    this.add.emit({title:this.twoWayBindingTitle, text:this.twoWayBindingText});
     // this.form?.nativeElement.reset();
-    this.form().nativeElement.reset();
+    // this.form().nativeElement.reset();
+    this.twoWayBindingText ='';
+    this.twoWayBindingTitle='';
   }
 }
