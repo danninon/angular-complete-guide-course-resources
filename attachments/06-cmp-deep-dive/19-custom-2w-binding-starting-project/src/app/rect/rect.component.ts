@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-rect',
@@ -9,7 +9,8 @@ import { Component } from '@angular/core';
 })
 export class RectComponent {
   // Todo: Implement custom two-way binding
-
+  @Input({required:true}) size!:{width:string,height:string};
+  
   onReset() {
     // ...
   }
