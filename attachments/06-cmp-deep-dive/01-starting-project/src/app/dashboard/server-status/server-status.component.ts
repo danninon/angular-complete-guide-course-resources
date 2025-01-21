@@ -16,9 +16,9 @@ private destroyRef = inject(DestroyRef);
     console.log("IN 'ngOnInit'");
       // this.interval = setInterval(()=> {
         const interval  = setInterval(()=> {
-      console.log('Checking server status...');
+      // console.log('Checking server status...');
       const randResult = Math.random();
-      console.log(randResult);
+      // console.log(randResult);
       if (randResult > 0.5){
         this.currentStatus = 'online';
       }else{
