@@ -7,9 +7,9 @@ import { LoggingService } from '../logging.service';
 })
 export class TasksService {
   private tasks = signal<Task[]>([]);
-private loggingService = inject(LoggingService);
+  private loggingService = inject(LoggingService);
   //
-  getTasks(){
+  get getTasks(){
     return this.tasks.asReadonly();
   }
 
