@@ -12,21 +12,30 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './available-places.component.css',
   imports: [PlacesComponent, PlacesContainerComponent],
 })
-export class AvailablePlacesComponent implements OnInit{
+export class AvailablePlacesComponent implements OnInit {
   places = signal<Place[] | undefined>(undefined);
+  isFetching = signal(false);
+
   private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
   ngOnInit(): void {
-    const subscription = this.httpClient.get<{places: Place[]}>('http://localhost:3000/places').subscribe({
-      next: (resData) => {
-        return console.log(resData);
-      }
-    });
-    this.destroyRef.onDestroy(()=>{
+    this.isFetching.set(true);
+    const subscription = this.httpClient
+      .get<{ places: Place[] }>('http://localhost:3000/places', {
+        observe: 'response',
+      })
+      .subscribe({
+        next: (res) => {
+          const placesData = res.body?.places
+          this.places.set(placesData);
+          console.log(placesData);
+        },
+        complete: () => {
+          this.isFetching.set(false);
+        }
+      });
+    this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
-    })
-
-    
+    });
   }
-  
 }
