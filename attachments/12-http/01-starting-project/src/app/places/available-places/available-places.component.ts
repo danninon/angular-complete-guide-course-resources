@@ -16,7 +16,7 @@ import { subscribeOn } from 'rxjs';
 })
 export class AvailablePlacesComponent implements OnInit {
   onSelectPlaces(selectedPlace: Place) {
-   const subscripion = this.placesService.addPlaceToUserPlaces(selectedPlace.id).subscribe({
+   const subscripion = this.placesService.addPlaceToUserPlaces(selectedPlace).subscribe({
         next: (resData) => console.log(resData),
       });
 

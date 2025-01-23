@@ -2,7 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 
 import { Place } from './place.model';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,17 +18,36 @@ export class PlacesService {
   }
 
   loadUserPlaces() {
-    return this.fetchPlaces('http://localhost:3000/user-places').pipe(tap({
-      next: (userPlaces) => {
-        if (userPlaces.body?.places){
-          this.userPlaces.set(userPlaces.body.places)}}
-    }));
+    return this.fetchPlaces('http://localhost:3000/user-places').pipe(
+      tap({
+        next: (userPlaces) => {
+          if (userPlaces.body?.places) {
+            this.userPlaces.set(userPlaces.body.places);
+          }
+        },
+      })
+    );
   }
 
-  addPlaceToUserPlaces(placeId: string) {
-    return this.httpClient.put('http://localhost:3000/user-places', {
-      placeId: placeId,
-    });
+  addPlaceToUserPlaces(newUserPlace: Place) {
+    const prevPlaces = this.userPlaces();
+    
+    // this.userPlaces.update(prevPlaces => [...prevPlaces, newUserPlace]);
+    if (!prevPlaces.some((place)=> place.id === newUserPlace.id)){
+      this.userPlaces.set([...prevPlaces, newUserPlace]);
+    }
+    
+    return this.httpClient
+      .put('http://localhost:3000/user-places', {
+        placeId: newUserPlace.id,
+      })
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          this.userPlaces.set(prevPlaces);
+          return throwError(()=> new Error('Failed to store selected place.'))
+        })
+      );
   }
 
   removeUserPlace(place: Place) {}
