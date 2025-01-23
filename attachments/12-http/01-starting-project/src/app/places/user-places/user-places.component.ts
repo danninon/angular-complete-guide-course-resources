@@ -14,6 +14,24 @@ import { PlacesService } from '../places.service';
   imports: [PlacesContainerComponent, PlacesComponent],
 })
 export class UserPlacesComponent implements OnInit {
+  onDeletePlace(userSelectedPlace: Place) {
+    const subscription = this.placesService.removeUserPlace(userSelectedPlace).subscribe({
+      complete: () => {
+        this.isFetching.set(false);
+      },
+      error: (error) => {
+        console.log(error);
+        this.error.set(
+          'Something went wrong fetching your favorite places. Please try again later'
+        )
+      }
+    })
+  
+    this.destroyRef.onDestroy(() => {
+      subscription.unsubscribe();
+    });
+
+  }
   
   isFetching = signal(false);
   error = signal('');
@@ -34,7 +52,7 @@ export class UserPlacesComponent implements OnInit {
         this.error.set(
           'Something went wrong fetching your favorite places. Please try again later'
         );
-      },
+      }
     });
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
